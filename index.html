@@ -15,11 +15,60 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   </head>
   <body class="lato-google-font">
-    <h1 class="text-red-500 ">
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero rerum
-      molestias totam corrupti, quisquam omnis neque iure atque suscipit non!
-    </h1>
-    <button class="btn btn-primary">daisy ui</button>
+    <header>
+      <!-- ---------------navbar start here---------------------- -->
+      <nav class="w-11/12 mx-auto">
+        <div class="navbar">
+          <div class="navbar-start flex gap-3 items-center">
+            <img class="w-7 h-6 object-cover" src="./images/logo.webp" alt="">
+            <a class="text-xl lg:text-3xl font-black">Peddy</a>
+          </div>
+          <div class="navbar-center">
+            <ul
+              class="hidden sm:flex gap-3 justify-center items-center p-2 opacity-70 text-base font-normal"
+            >
+              <button class="btn">
+                <li><a>Home</a></li>
+              </button>
+              <button class="btn">
+                <li><a>Shop</a></li>
+              </button>
+              <button class="btn">
+                <li><a>Contact</a></li>
+              </button>
+            </ul>
+          </div>
+          <div class="navbar-end">
+            <div class="dropdown">
+              <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M4 6h16M4 12h16M4 18h7"
+                  />
+                </svg>
+              </div>
+              <ul
+                tabindex="0"
+                class="menu menu-sm sm:hidden dropdown-content bg-base-100 rounded-box z-1 mt-3 shadow"
+              >
+                <li><a>Home</a></li>
+                <li><a>Shop</a></li>
+                <li><a>Contact</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
     <!-- vanilla js link -->
     <script src="./js/script.js"></script>
   </body>
