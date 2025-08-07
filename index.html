@@ -19,7 +19,7 @@
       <!-- ---------------navbar start here---------------------- -->
       <div id="navigation" class="navbar mb-7 lg:mb-14">
         <div class="navbar-start flex gap-3 items-center">
-          <img class="w-7 h-6 object-cover" src="./images/logo.webp" alt="" />
+          <img class="w-7 h-6 object-cover" src="/images/logo.webp" />
           <a class="text-xl lg:text-3xl font-black">Peddy</a>
         </div>
         <div class="navbar-center">
@@ -57,7 +57,7 @@
             </div>
             <ul
               tabindex="0"
-              class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 shadow sm:hidden lg:hidden"
+              class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 shadow sm:hidden lg:hidden xl:hidden"
             >
               <li><a>Home</a></li>
               <li><a>Shop</a></li>
@@ -82,15 +82,11 @@
           at its layout. The point of using Lorem Ipsum is that it has a.
         </p>
         <a href="#adopt"
-          ><button class="btn btn-lg btn-accent text-white ">
+          ><button class="btn btn-lg btn-accent text-white">
             View More
           </button></a
         >
-        <img
-          class="w-2/3 mx-auto object-cover"
-          src="./images/pet.webp"
-          alt=""
-        />
+        <img class="w-2/3 mx-auto object-cover" src="/images/pet.webp" />
       </div>
     </header>
 
@@ -117,13 +113,17 @@
         <div id="sort-container" class="flex justify-between items-center my-8">
           <h4 class="text-base lg:text-2xl font-black">Best Deal For you</h4>
           <button
-            class="btn btn-lg btn-accent text-white text-sm sm:text-lg xl:text-xl">
+            class="btn btn-lg btn-accent text-white text-sm sm:text-lg xl:text-xl"
+          >
             Sort By Price
           </button>
         </div>
 
         <div id="card-container" class="flex gap-10">
-          <div id="layout-card" class="w-3/4 grid gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"></div>
+          <div
+            id="layout-card"
+            class="w-3/4 grid gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
+          ></div>
           <div id="selected-card" class="w-1/4"></div>
         </div>
       </section>
