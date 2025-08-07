@@ -15,59 +15,75 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   </head>
   <body class="lato-google-font">
-    <header>
+    <header class="w-11/12 mx-auto">
       <!-- ---------------navbar start here---------------------- -->
-      <nav class="w-11/12 mx-auto">
-        <div class="navbar">
-          <div class="navbar-start flex gap-3 items-center">
-            <img class="w-7 h-6 object-cover" src="./images/logo.webp" alt="">
-            <a class="text-xl lg:text-3xl font-black">Peddy</a>
-          </div>
-          <div class="navbar-center">
+      <div id="navigation" class="navbar mb-7 lg:mb-14">
+        <div class="navbar-start flex gap-3 items-center">
+          <img class="w-7 h-6 object-cover" src="./images/logo.webp" alt="" />
+          <a class="text-xl lg:text-3xl font-black">Peddy</a>
+        </div>
+        <div class="navbar-center">
+          <ul
+            class="hidden sm:flex gap-3 justify-center items-center p-2 opacity-70 text-base font-normal"
+          >
+            <button class="btn">
+              <li><a>Home</a></li>
+            </button>
+            <button class="btn">
+              <li><a>Shop</a></li>
+            </button>
+            <button class="btn">
+              <li><a>Contact</a></li>
+            </button>
+          </ul>
+        </div>
+        <div class="navbar-end">
+          <div class="dropdown">
+            <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 6h16M4 12h16M4 18h7"
+                />
+              </svg>
+            </div>
             <ul
-              class="hidden sm:flex gap-3 justify-center items-center p-2 opacity-70 text-base font-normal"
+              tabindex="0"
+              class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 shadow sm:hidden lg:hidden"
             >
-              <button class="btn">
-                <li><a>Home</a></li>
-              </button>
-              <button class="btn">
-                <li><a>Shop</a></li>
-              </button>
-              <button class="btn">
-                <li><a>Contact</a></li>
-              </button>
+              <li><a>Home</a></li>
+              <li><a>Shop</a></li>
+              <li><a>Contact</a></li>
             </ul>
           </div>
-          <div class="navbar-end">
-            <div class="dropdown">
-              <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="h-5 w-5"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M4 6h16M4 12h16M4 18h7"
-                  />
-                </svg>
-              </div>
-              <ul
-                tabindex="0"
-                class="menu menu-sm sm:hidden dropdown-content bg-base-100 rounded-box z-1 mt-3 shadow"
-              >
-                <li><a>Home</a></li>
-                <li><a>Shop</a></li>
-                <li><a>Contact</a></li>
-              </ul>
-            </div>
-          </div>
         </div>
-      </nav>
+      </div>
+
+      <!-- ------------banner start here------------------------ -->
+      <div id="banner" class="flex flex-col gap-6 text-center mb-12 lg:mb-24">
+        <h6 class="text-lg lg:text-2xl font-semibold text-gray-400">
+          Bringing Families Together ❤️‍🔥
+        </h6>
+        <h1 class="text-3xl lg:text-7xl font-black">
+          Your Path to Adoption <br />
+          Starts Here
+        </h1>
+        <p class="text-xs lg:text-base font-normal">
+          It is a long established fact that a reader will be distracted by the
+          readable content of a page when looking <br />
+          at its layout. The point of using Lorem Ipsum is that it has a.
+        </p>
+        <button class="btn btn-accent text-white w-2/6 lg:w-1/6 mx-auto">View More</button>
+        <img class="w-2/3 mx-auto object-cover" src="./images/pet.webp" alt="" />
+      </div>
     </header>
     <!-- vanilla js link -->
     <script src="./js/script.js"></script>
