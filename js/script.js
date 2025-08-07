@@ -59,27 +59,27 @@ const displayPetCard = (cardsData) => {
             ${element.pet_name}
         </h2>
         <div class = "flex gap-2 items-center">
-              <img class="w-5 h-5" src = "/images/f.png" />
+              <i class="fa-solid fa-border-all"></i>
               <p>Breed : ${element.breed}</p>
         </div>
         <div class = "flex gap-2 items-center">
-              <img class="w-5 h-5" src = "/images/f2.png" />
+              <i class="fa-solid fa-cake-candles"></i>
               <p>Birth : ${element.date_of_birth}</p>
         </div>
         <div class = "flex gap-2 items-center">
-              <img class="w-5 h-5" src = "/images/f3.png" />
+              <i class="fa-solid fa-mercury"></i>
               <p>Gender : ${element.gender}</p>
         </div>
         <div class = "flex gap-2 items-center">
-              <img class="w-5 h-5" src = "/images/f4.png" />
+              <i class="fa-solid fa-dollar-sign"></i>
               <p>Price : ${element.price}</p>
         </div>
     
         <div class="flex justify-between border-t-2 border-gray-300">
-            <button class="btn btn-sm btn-soft btn-accent mt-5 border-2 border-gray-200">
-                  <img class="w-5 h-5" src = "/images/liked.png"/>
+            <button class="btn btn-sm  mt-5 border-2 border-gray-200">
+                    <i class="fa-regular fa-thumbs-up"></i>
             </button>
-            <button class="btn btn-sm  btn-soft btn-accent mt-5 border-2 border-gray-200">
+            <button class="btn btn-sm btn-soft btn-accent mt-5 border-2 border-gray-200">
                   Adopt
             </button>
             <button class="btn btn-sm  btn-soft btn-accent mt-5 border-2 border-gray-200">
