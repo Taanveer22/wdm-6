@@ -9,14 +9,24 @@ const loadCategoryData = async () => {
   displayCategoryBtn(data.categories);
 };
 
-const displayCategoryBtn = (catData) => {
+// load all pets card from api========================
+const loadPetCardData = async () => {
+  const res = await fetch(
+    `https://openapi.programming-hero.com/api/peddy/pets`
+  );
+  const data = await res.json();
+  displayPetCard(data.pets);
+};
+
+// display category btn in the ui================================
+const displayCategoryBtn = (categoryData) => {
   const categoryBtnContainer = document.querySelector(
     "#category-btn-container"
   );
   // console.log(categoryBtnContainer);
-  // console.log(catData);
-  catData.forEach((item) => {
-    console.log(item);
+  // console.log(categoryData);
+  categoryData.forEach((item) => {
+    // console.log(item);
     const div = document.createElement("div");
     div.classList =
       "flex gap-2 items-center py-2 sm:py-4 xl:py-6 px-4 sm:px-8 xl:px-12 bg-gray-200";
@@ -28,5 +38,62 @@ const displayCategoryBtn = (catData) => {
   });
 };
 
-// final function invocation===========================
+// display pet cards in the ui==================================
+const displayPetCard = (cardsData) => {
+  // console.log(cardsData);
+  const layoutCard = document.querySelector("#layout-card");
+  cardsData.forEach((element) => {
+    // console.log(element);
+    const div = document.createElement("div");
+    div.classList = "card bg-base-100 shadow-sm";
+    div.innerHTML = `
+    <figure class="px-5 pt-5">
+      <img
+        src="${element.image}"
+        class="rounded-xl" />
+    </figure>
+
+    <div class="card-body">
+
+        <h2 class="card-title">
+            ${element.pet_name}
+        </h2>
+        <div class = "flex gap-2 items-center">
+              <img class="w-5 h-5" src = "../images/f.png" />
+              <p>Breed : ${element.breed}</p>
+        </div>
+        <div class = "flex gap-2 items-center">
+              <img class="w-5 h-5" src = "../images/f2.png" />
+              <p>Birth : ${element.date_of_birth}</p>
+        </div>
+        <div class = "flex gap-2 items-center">
+              <img class="w-5 h-5" src = "../images/f3.png" />
+              <p>Gender : ${element.gender}</p>
+        </div>
+        <div class = "flex gap-2 items-center">
+              <img class="w-5 h-5" src = "../images/f4.png" />
+              <p>Price : ${element.price}</p>
+        </div>
+    
+        <div class="flex justify-between border-t-2 border-gray-300">
+            <button class="btn btn-sm btn-soft btn-accent mt-5 border-2 border-gray-200">
+                  <img class="w-5 h-5" src = "../images/liked.png"/>
+            </button>
+            <button class="btn btn-sm  btn-soft btn-accent mt-5 border-2 border-gray-200">
+                  Adopt
+            </button>
+            <button class="btn btn-sm  btn-soft btn-accent mt-5 border-2 border-gray-200">
+                  Details
+            </button>
+        </div>
+
+    </div>
+  
+    `;
+    layoutCard.appendChild(div);
+  });
+};
+
+//load api function invocation===========================
 loadCategoryData();
+loadPetCardData();
