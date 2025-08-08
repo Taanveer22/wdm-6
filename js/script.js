@@ -1,6 +1,6 @@
 console.log("connected");
 
-// load category btn data from api===================
+// load category btn data from api : 1 ===================
 const loadCategoryData = async () => {
   const res = await fetch(
     `https://openapi.programming-hero.com/api/peddy/categories`
@@ -9,7 +9,7 @@ const loadCategoryData = async () => {
   displayCategoryBtn(data.categories);
 };
 
-// load all pets card from api========================
+// load all pets card from api : 2 ========================
 const loadPetCardData = async () => {
   const res = await fetch(
     `https://openapi.programming-hero.com/api/peddy/pets`
@@ -18,7 +18,7 @@ const loadPetCardData = async () => {
   displayPetCard(data.pets);
 };
 
-// display category btn in the ui================================
+// display category btn in the ui by api : 1 =============================
 const displayCategoryBtn = (categoryData) => {
   const categoryBtnContainer = document.querySelector(
     "#category-btn-container"
@@ -38,7 +38,7 @@ const displayCategoryBtn = (categoryData) => {
   });
 };
 
-// display pet cards in the ui==================================
+// display pet cards in the ui by api : 2 ==================================
 const displayPetCard = (cardsData) => {
   // console.log(cardsData);
   const layoutCard = document.querySelector("#layout-card");
@@ -60,19 +60,25 @@ const displayPetCard = (cardsData) => {
         </h2>
         <div class = "flex gap-2 items-center">
               <i class="fa-solid fa-border-all"></i>
-              <p>Breed : ${element.breed}</p>
+              <p>Breed : ${element.breed ? element.breed : "Not Available"}</p>
         </div>
         <div class = "flex gap-2 items-center">
               <i class="fa-solid fa-cake-candles"></i>
-              <p>Birth : ${element.date_of_birth}</p>
+              <p>Birth : ${
+                element.date_of_birth
+                  ? element.date_of_birth.slice(0, 4)
+                  : "Not Available"
+              }</p>
         </div>
         <div class = "flex gap-2 items-center">
               <i class="fa-solid fa-mercury"></i>
-              <p>Gender : ${element.gender}</p>
+              <p>Gender : ${
+                element.gender ? element.gender : "Not Available"
+              }</p>
         </div>
         <div class = "flex gap-2 items-center">
               <i class="fa-solid fa-dollar-sign"></i>
-              <p>Price : ${element.price}</p>
+              <p>Price : ${element.price ? element.price : "Not Available"}</p>
         </div>
     
         <div class="flex justify-between border-t-2 border-gray-300">
