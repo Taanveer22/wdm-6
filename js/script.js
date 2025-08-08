@@ -57,7 +57,7 @@ const displayPetCard = (cardsData) => {
   if (cardsData.length === 0) {
     layoutCard.classList.remove("grid");
     layoutCard.innerHTML = `
-          <div class ="max-h-min flex flex-col gap-5 items-center justify-center">
+          <div class ="max-h-min p-5 flex flex-col gap-5 items-center justify-center bg-gray-100 rounded-xl">
               <img class = "max-w-40 max-h-40 object-cover" src = "images/error.webp" />
               <h1 class = "text-lg sm:text-2xl lg:text-4xl font-semibold"> 
                 No Information Available
@@ -108,7 +108,8 @@ const displayPetCard = (cardsData) => {
         </div>
     
         <div class="flex justify-between border-t-2 border-gray-300">
-            <button class="btn btn-sm  mt-5 border-2 border-gray-200">
+            <button class="btn btn-sm  mt-5 border-2 border-gray-200"
+                    onclick = "handleLikedPet('${element.image}')">
                     <i class="fa-regular fa-thumbs-up"></i>
             </button>
             <button class="btn btn-sm btn-soft btn-accent mt-5 border-2 border-gray-200">
@@ -124,6 +125,19 @@ const displayPetCard = (cardsData) => {
     `;
     layoutCard.appendChild(div);
   });
+};
+
+// handle liked pet onclick function from api : 2 ==================
+const handleLikedPet = (petImg) => {
+  // console.log(petImg);
+  const selectedCard = document.querySelector("#selected-card");
+  // console.log(selectedCard);
+  const div = document.createElement("div");
+  div.className = "max-h-32 max-w-32";
+  div.innerHTML = `
+      <img class = "h-full w-full object-cover" src = "${petImg}"/>
+  `;
+  selectedCard.appendChild(div);
 };
 
 //load api function invocation===========================
