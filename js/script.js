@@ -53,6 +53,21 @@ const displayPetCard = (cardsData) => {
   // console.log(cardsData);
   const layoutCard = document.querySelector("#layout-card");
   layoutCard.innerHTML = "";
+  // console.log(layoutCard);
+  if (cardsData.length === 0) {
+    layoutCard.classList.remove("grid");
+    layoutCard.innerHTML = `
+          <div class ="max-h-min flex flex-col gap-5 items-center justify-center">
+              <img class = "max-w-40 max-h-40 object-cover" src = "images/error.webp" />
+              <h1 class = "text-lg sm:text-2xl lg:text-4xl font-semibold"> 
+                No Information Available
+              </h1>
+              <p class = "text-xs sm:text-base font-normal opacity-70">This pet category is temporarily unoccupied. New additions are processed regularly—please return soon. </p>
+          </div>
+    `;
+  } else {
+    layoutCard.classList.add("grid");
+  }
   cardsData.forEach((element) => {
     // console.log(element);
     const div = document.createElement("div");
