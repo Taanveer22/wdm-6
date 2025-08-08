@@ -1,6 +1,7 @@
 console.log("connected");
-
+// =======================================================
 // load category btn data from api : 1 ===================
+// =======================================================
 const loadCategoryBtnData = async () => {
   const res = await fetch(
     `https://openapi.programming-hero.com/api/peddy/categories`
@@ -9,7 +10,9 @@ const loadCategoryBtnData = async () => {
   displayCategoryBtn(data.categories);
 };
 
+// ========================================================
 // load all pets card from api : 2 ========================
+// ========================================================
 const loadPetCardData = async () => {
   const res = await fetch(
     `https://openapi.programming-hero.com/api/peddy/pets`
@@ -18,7 +21,9 @@ const loadPetCardData = async () => {
   displayPetCard(data.pets);
 };
 
+// =====================================================================
 // load pets card by pet category from api : 3 =========================
+// =====================================================================
 const loadPetCardByCategoryBtn = async (ctgBtn) => {
   // alert(ctgBtn);
   const res = await fetch(
@@ -28,7 +33,21 @@ const loadPetCardByCategoryBtn = async (ctgBtn) => {
   displayPetCard(data.data);
 };
 
-// display category btn in the ui by api : 1 =============================
+// ===============================================================
+// load modal by pet id from api : 4==============================
+// ===============================================================
+const loadModal = async (petId) => {
+  // console.log(petId);
+  const res = await fetch(
+    `https://openapi.programming-hero.com/api/peddy/pet/${petId}`
+  );
+  const data = await res.json();
+  displayModal(data.petData);
+};
+
+// ====================================================================
+// display category btn in the webpage via api : 1 ====================
+// ====================================================================
 const displayCategoryBtn = (categoryData) => {
   const categoryBtnContainer = document.querySelector(
     "#category-btn-container"
@@ -40,15 +59,17 @@ const displayCategoryBtn = (categoryData) => {
     const div = document.createElement("div");
     div.innerHTML = `
         <button onclick = "loadPetCardByCategoryBtn('${item.category}')" class = "btn btn-xs sm:btn-md xl:btn-xl flex gap-2 items-center">
-                <img class = "w-4 sm:w-8 xl:w-14 object-cover" src = "${item.category_icon}"/>
-                <p class= "text-sm sm:text-lg xl:text-2xl font-semibold">${item.category}</p>
+                <img class = "w-3 sm:w-6 xl:w-14 object-cover" src = "${item.category_icon}"/>
+                <p class= "text-xs sm:text-base xl:text-2xl font-semibold">${item.category}</p>
         </button>
     `;
     categoryBtnContainer.appendChild(div);
   });
 };
 
-// display pet cards in the ui by api : 2 ==================================
+// ====================================================================
+// display pet cards in the webpage via api : 2 =======================
+// ====================================================================
 const displayPetCard = (cardsData) => {
   // console.log(cardsData);
   const layoutCard = document.querySelector("#layout-card");
@@ -108,14 +129,15 @@ const displayPetCard = (cardsData) => {
         </div>
     
         <div class="flex justify-between border-t-2 border-gray-300">
-            <button class="btn btn-sm  mt-5 border-2 border-gray-200"
+            <button class="btn btn-xs sm:btn-sm xl:btn-lg  mt-5 border-2 border-gray-200"
                     onclick = "handleLikedPet('${element.image}')">
                     <i class="fa-regular fa-thumbs-up"></i>
             </button>
-            <button class="btn btn-sm btn-soft btn-accent mt-5 border-2 border-gray-200">
+            <button class="btn btn-xs sm:btn-sm xl:btn-lg btn-soft btn-accent mt-5 border-2 border-gray-200">
                   Adopt
             </button>
-            <button class="btn btn-sm  btn-soft btn-accent mt-5 border-2 border-gray-200">
+            <button class="btn btn-xs sm:btn-sm xl:btn-lg btn-soft btn-accent mt-5 border-2 border-gray-200"
+                  onclick="loadModal('${element.petId}')">
                   Details
             </button>
         </div>
@@ -127,7 +149,9 @@ const displayPetCard = (cardsData) => {
   });
 };
 
-// handle liked pet onclick function from api : 2 ==================
+// ===============================================================
+// handle liked pet onclick function via api : 2 =================
+// ===============================================================
 const handleLikedPet = (petImg) => {
   // console.log(petImg);
   const selectedCard = document.querySelector("#selected-card");
@@ -140,6 +164,87 @@ const handleLikedPet = (petImg) => {
   selectedCard.appendChild(div);
 };
 
+// ==================================================================
+// display modal in the webpage via api : 4 =========================
+// ==================================================================
+const displayModal = (modalData) => {
+  console.log(modalData);
+  const modalContent = document.querySelector("#modal-content");
+  // console.log(modalContent);
+  modalContent.innerHTML = `
+  <img class = "h-64 w-full object-cover" src = "${modalData.image}"/>
+  <h2 class="text-base sm:text-2xl font-semibold my-3">
+      ${modalData.pet_name}
+  </h2>
+
+  <article class = "flex gap-5 opacity-70 text-xs sm:text-base font-normal">
+          <section>
+                  <div class = "flex gap-2 items-center">
+                      <i class="fa-solid fa-border-all"></i>
+                      <p>
+                        Breed : ${
+                          modalData.breed ? modalData.breed :
+                          "Unavailable"
+                        }
+                      </p>
+                  </div>
+      
+                  <div class = "flex gap-2 items-center">
+                      <i class="fa-solid fa-mercury"></i>
+                      <p>
+                        Gender : ${
+                          modalData.gender ? modalData.gender : 
+                          "Unavailable"
+                        }
+                      </p>
+                  </div>
+      
+                  <div class = "flex gap-2 items-center">
+                      <i class="fa-solid fa-syringe"></i>
+                      <p>
+                        Vaccinated Status : ${
+                          modalData.vaccinated_status
+                            ? modalData.vaccinated_status
+                            : "Unavailable"
+                        }
+                      </p>
+                  </div>
+        </section>
+
+        <section>
+                  <div class = "flex gap-2 items-center">
+                      <i class="fa-solid fa-cake-candles"></i>
+                      <p>
+                          Birth : ${
+                            modalData.date_of_birth
+                              ? modalData.date_of_birth.slice(0, 4)
+                              : "Unavailable"
+                          }
+                      </p>
+                  </div>
+
+                  <div class = "flex gap-2 items-center">
+                      <i class="fa-solid fa-dollar-sign"></i>
+                      <p>
+                        Price : ${
+                          modalData.price ? modalData.price :
+                          "Unavailable"
+                        }
+                      </p>
+                  </div>
+        </section>
+  </article>
+
+  <h2 class="text-base sm:text-2xl font-semibold my-3">
+      Details Information
+  </h2>
+  <p class = "text-xs sm:text-base font-normal opacity-70">
+  ${modalData.pet_details.slice(0, 200)}</p> 
+  `;
+  document.getElementById("details_modal").showModal();
+};
+// ======================================================
 //load api function invocation===========================
+// ======================================================
 loadCategoryBtnData();
 loadPetCardData();
