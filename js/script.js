@@ -1,7 +1,7 @@
 console.log("connected");
 
 // load category btn data from api : 1 ===================
-const loadCategoryData = async () => {
+const loadCategoryBtnData = async () => {
   const res = await fetch(
     `https://openapi.programming-hero.com/api/peddy/categories`
   );
@@ -18,6 +18,16 @@ const loadPetCardData = async () => {
   displayPetCard(data.pets);
 };
 
+// load pets card by pet category from api : 3 =========================
+const loadPetCardByCategoryBtn = async (ctgBtn) => {
+  // alert(ctgBtn);
+  const res = await fetch(
+    `https://openapi.programming-hero.com/api/peddy/category/${ctgBtn}`
+  );
+  const data = await res.json();
+  displayPetCard(data.data);
+};
+
 // display category btn in the ui by api : 1 =============================
 const displayCategoryBtn = (categoryData) => {
   const categoryBtnContainer = document.querySelector(
@@ -28,11 +38,11 @@ const displayCategoryBtn = (categoryData) => {
   categoryData.forEach((item) => {
     // console.log(item);
     const div = document.createElement("div");
-    div.classList =
-      "flex gap-2 items-center py-2 sm:py-4 xl:py-6 px-4 sm:px-8 xl:px-12 bg-gray-200";
     div.innerHTML = `
-    <img class = "w-4 sm:w-8 xl:w-14 object-cover" src = "${item.category_icon}"/>
-    <p class= "text-sm sm:text-lg xl:text-2xl font-semibold">${item.category}</p>
+        <button onclick = "loadPetCardByCategoryBtn('${item.category}')" class = "btn btn-xs sm:btn-md xl:btn-xl flex gap-2 items-center">
+                <img class = "w-4 sm:w-8 xl:w-14 object-cover" src = "${item.category_icon}"/>
+                <p class= "text-sm sm:text-lg xl:text-2xl font-semibold">${item.category}</p>
+        </button>
     `;
     categoryBtnContainer.appendChild(div);
   });
@@ -42,6 +52,7 @@ const displayCategoryBtn = (categoryData) => {
 const displayPetCard = (cardsData) => {
   // console.log(cardsData);
   const layoutCard = document.querySelector("#layout-card");
+  layoutCard.innerHTML = "";
   cardsData.forEach((element) => {
     // console.log(element);
     const div = document.createElement("div");
@@ -101,5 +112,5 @@ const displayPetCard = (cardsData) => {
 };
 
 //load api function invocation===========================
-loadCategoryData();
+loadCategoryBtnData();
 loadPetCardData();
