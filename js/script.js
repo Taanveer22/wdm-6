@@ -67,8 +67,9 @@ const displayCategoryBtn = (categoryData) => {
     const div = document.createElement("div");
     div.innerHTML = `
         <button id = "button-${item.category}"
-          onclick = "loadPetCardByCategoryBtn('${item.category}')" 
-          class = "category-button btn btn-xs sm:btn-md xl:btn-xl flex gap-2 items-center">
+        onclick = "loadPetCardByCategoryBtn('${item.category}')" 
+        class = "category-button btn btn-xs sm:btn-md xl:btn-xl flex gap-2 items-center"
+        >
                 <img class = "w-3 sm:w-6 xl:w-14 object-cover" src = "${item.category_icon}"/>
                 <p class= "text-xs sm:text-base xl:text-2xl font-semibold">${item.category}</p>
         </button>
@@ -90,11 +91,15 @@ const displayPetCard = (cardsData) => {
     layoutCard.classList.remove("grid");
     layoutCard.innerHTML = `
           <div class ="max-h-min p-5 flex flex-col gap-5 items-center justify-center bg-gray-100 rounded-xl">
+
               <img class = "max-w-40 max-h-40 object-cover" src = "./images/error.webp" />
+
               <h1 class = "text-lg sm:text-2xl lg:text-4xl font-semibold"> 
                 No Information Available
               </h1>
+
               <p class = "text-xs sm:text-base font-normal opacity-70">This pet category is temporarily unoccupied. New additions are processed regularly—please return soon. </p>
+
           </div>
     `;
   } else {
@@ -117,10 +122,12 @@ const displayPetCard = (cardsData) => {
         <h2 class="card-title">
             ${element.pet_name}
         </h2>
+
         <div class = "flex gap-2 items-center">
               <i class="fa-solid fa-border-all"></i>
               <p>Breed : ${element.breed ? element.breed : "Not Available"}</p>
         </div>
+
         <div class = "flex gap-2 items-center">
               <i class="fa-solid fa-cake-candles"></i>
               <p>Birth : ${
@@ -129,29 +136,37 @@ const displayPetCard = (cardsData) => {
                   : "Not Available"
               }</p>
         </div>
+
         <div class = "flex gap-2 items-center">
               <i class="fa-solid fa-mercury"></i>
               <p>Gender : ${
                 element.gender ? element.gender : "Not Available"
               }</p>
         </div>
+
         <div class = "flex gap-2 items-center">
               <i class="fa-solid fa-dollar-sign"></i>
               <p>Price : ${element.price ? element.price : "Not Available"}</p>
         </div>
     
         <div class="flex justify-between border-t-2 border-gray-300">
+
             <button class="btn btn-xs sm:btn-sm xl:btn-lg  mt-5 border-2 border-gray-200"
-                    onclick = "handleLikedPet('${element.image}')">
+            onclick = "handleLikedPet('${element.image}')">
                     <i class="fa-regular fa-thumbs-up"></i>
             </button>
-            <button class="btn btn-xs sm:btn-sm xl:btn-lg btn-soft btn-accent mt-5 border-2 border-gray-200">
+
+            <button class="btn btn-xs sm:btn-sm xl:btn-lg btn-soft btn-accent mt-5 border-2 border-gray-200"
+            id="adopt-btn-${element.petId}"  
+            onclick = "handleDisabled('${element.petId}')">
                   Adopt
             </button>
+
             <button class="btn btn-xs sm:btn-sm xl:btn-lg btn-soft btn-accent mt-5 border-2 border-gray-200"
-                  onclick="loadModal('${element.petId}')">
+            onclick="loadModal('${element.petId}')">
                   Details
             </button>
+
         </div>
 
     </div>
@@ -263,6 +278,33 @@ const removeActiveClass = () => {
     // console.log(singleButton);
     singleButton.classList.remove("active");
   }
+};
+
+// ==================================================================
+// handle adopt button disabled onclick function via api : 2 ========
+// ==================================================================
+const handleDisabled = (petId) => {
+  const modal = document.getElementById("adoption_modal");
+  const countdown = document.getElementById("countdown");
+  // show modal
+  modal.showModal();
+  // simple countdown
+  let seconds = 3;
+  const timer = setInterval(() => {
+    seconds--;
+    countdown.textContent = seconds > 0 ? `${seconds}` : ``;
+    // when coundown finish
+    if (seconds <= 0) {
+      clearInterval(timer);
+      modal.close();
+    }
+    // disable btn system
+    let adoptBtn = document.getElementById(`adopt-btn-${petId}`);
+    console.log(adoptBtn);
+    adoptBtn.textContent = "Adopted";
+    adoptBtn.className = "btn btn-xs btn-disabled";
+    adoptBtn.disabled = true;
+  }, 1000);
 };
 // ======================================================
 //load api function invocation===========================
