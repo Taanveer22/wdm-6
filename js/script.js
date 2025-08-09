@@ -30,6 +30,10 @@ const loadPetCardByCategoryBtn = async (ctgBtn) => {
     `https://openapi.programming-hero.com/api/peddy/category/${ctgBtn}`
   );
   const data = await res.json();
+  removeActiveClass();
+  const activeButton = document.getElementById(`button-${ctgBtn}`);
+  console.log(activeButton);
+  activeButton.classList.add("active");
   displayPetCard(data.data);
 };
 
@@ -58,7 +62,9 @@ const displayCategoryBtn = (categoryData) => {
     // console.log(item);
     const div = document.createElement("div");
     div.innerHTML = `
-        <button onclick = "loadPetCardByCategoryBtn('${item.category}')" class = "btn btn-xs sm:btn-md xl:btn-xl flex gap-2 items-center">
+        <button id = "button-${item.category}"
+          onclick = "loadPetCardByCategoryBtn('${item.category}')" 
+          class = "category-button btn btn-xs sm:btn-md xl:btn-xl flex gap-2 items-center">
                 <img class = "w-3 sm:w-6 xl:w-14 object-cover" src = "${item.category_icon}"/>
                 <p class= "text-xs sm:text-base xl:text-2xl font-semibold">${item.category}</p>
         </button>
@@ -79,7 +85,7 @@ const displayPetCard = (cardsData) => {
     layoutCard.classList.remove("grid");
     layoutCard.innerHTML = `
           <div class ="max-h-min p-5 flex flex-col gap-5 items-center justify-center bg-gray-100 rounded-xl">
-              <img class = "max-w-40 max-h-40 object-cover" src = "images/error.webp" />
+              <img class = "max-w-40 max-h-40 object-cover" src = "./images/error.webp" />
               <h1 class = "text-lg sm:text-2xl lg:text-4xl font-semibold"> 
                 No Information Available
               </h1>
@@ -183,8 +189,7 @@ const displayModal = (modalData) => {
                       <i class="fa-solid fa-border-all"></i>
                       <p>
                         Breed : ${
-                          modalData.breed ? modalData.breed :
-                          "Unavailable"
+                          modalData.breed ? modalData.breed : "Unavailable"
                         }
                       </p>
                   </div>
@@ -193,8 +198,7 @@ const displayModal = (modalData) => {
                       <i class="fa-solid fa-mercury"></i>
                       <p>
                         Gender : ${
-                          modalData.gender ? modalData.gender : 
-                          "Unavailable"
+                          modalData.gender ? modalData.gender : "Unavailable"
                         }
                       </p>
                   </div>
@@ -227,8 +231,7 @@ const displayModal = (modalData) => {
                       <i class="fa-solid fa-dollar-sign"></i>
                       <p>
                         Price : ${
-                          modalData.price ? modalData.price :
-                          "Unavailable"
+                          modalData.price ? modalData.price : "Unavailable"
                         }
                       </p>
                   </div>
@@ -242,6 +245,18 @@ const displayModal = (modalData) => {
   ${modalData.pet_details.slice(0, 200)}</p> 
   `;
   document.getElementById("details_modal").showModal();
+};
+
+// ==================================================================
+// remove acitive class from category buttons via api : 3 ===========
+// ==================================================================
+const removeActiveClass = () => {
+  const categoryButtons = document.querySelectorAll(".category-button");
+  // console.log(categoryButtons);
+  for (let singleButton of categoryButtons) {
+    // console.log(singleButton);
+    singleButton.classList.remove("active");
+  }
 };
 // ======================================================
 //load api function invocation===========================

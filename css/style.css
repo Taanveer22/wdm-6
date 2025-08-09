@@ -4,3 +4,9 @@
 .lato-google-font{
   font-family: "Lato", sans-serif;
 }
+
+.active{
+  background-color: green;
+  color: white;
+  border-radius: 50px;
+}
