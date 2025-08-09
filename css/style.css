@@ -10,3 +10,7 @@
   color: white;
   border-radius: 50px;
 }
+
+#spinner{
+  display: none;
+}

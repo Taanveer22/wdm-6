@@ -3,10 +3,14 @@ console.log("connected");
 // load category btn data from api : 1 ===================
 // =======================================================
 const loadCategoryBtnData = async () => {
+  document.getElementById("spinner").style.display = "block";
   const res = await fetch(
     `https://openapi.programming-hero.com/api/peddy/categories`
   );
   const data = await res.json();
+  if (data.categories.length > 0) {
+    document.getElementById("spinner").style.display = "none";
+  }
   displayCategoryBtn(data.categories);
 };
 
@@ -78,6 +82,7 @@ const displayCategoryBtn = (categoryData) => {
 // ====================================================================
 const displayPetCard = (cardsData) => {
   // console.log(cardsData);
+
   const layoutCard = document.querySelector("#layout-card");
   layoutCard.innerHTML = "";
   // console.log(layoutCard);
@@ -95,6 +100,7 @@ const displayPetCard = (cardsData) => {
   } else {
     layoutCard.classList.add("grid");
   }
+
   cardsData.forEach((element) => {
     // console.log(element);
     const div = document.createElement("div");
