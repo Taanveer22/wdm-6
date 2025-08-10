@@ -18,7 +18,10 @@ const loadPetCardData = async () => {
     `https://openapi.programming-hero.com/api/peddy/pets`
   );
   const data = await res.json();
-  displayPetCard(data.pets);
+  // sort btn functionality implementation
+  const petsWithoutCategory = data.pets || [];
+  displayPetCard(petsWithoutCategory);
+  sortByPrice(petsWithoutCategory);
 };
 
 // =====================================================================
@@ -36,15 +39,15 @@ const loadPetCardByCategoryBtn = async (ctgBtn) => {
   if (data.data.length > 0) {
     document.getElementById("spinner").style.display = "none";
   }
-  // acitve btn functionality
+  // acitve btn functionality implementation
   removeActiveClass();
   const activeButton = document.getElementById(`button-${ctgBtn}`);
   console.log(activeButton);
   activeButton.classList.add("active");
-  // for sort button implementation
-  const allPets = data.data || [];
-  displayPetCard(allPets);
-  sortByPrice(allPets);
+  // sort btn functinality implementation
+  const petsByCategeory = data.data || [];
+  displayPetCard(petsByCategeory);
+  sortByPrice(petsByCategeory);
 };
 
 // ===============================================================
@@ -201,11 +204,11 @@ const handleLikedPet = (petImg) => {
 // display modal in the webpage via api : 4 =========================
 // ==================================================================
 const displayModal = (modalData) => {
-  console.log(modalData);
+  // console.log(modalData);
   const modalContent = document.querySelector("#modal-content");
   // console.log(modalContent);
   modalContent.innerHTML = `
-  <img class = "h-24 sm:h-44 xl:h-64 w-full object-cover" 
+  <img class = "h-32 sm:h-48 xl:h-64 w-full object-cover" 
       src = "${modalData.image}"/>
   <h2 class="text-base sm:text-2xl font-semibold my-3">
       ${modalData.pet_name}
@@ -318,9 +321,9 @@ const handleDisabled = (petId) => {
 // implement sorting funtionality via api: 3 ==========================
 // =====================================================================
 const sortByPrice = (allPets) => {
-  console.log(allPets);
+  // console.log(allPets);
   const sortButton = document.getElementById("sort-button");
-  console.log(sortButton);
+  // console.log(sortButton);
 
   sortButton.addEventListener("click", function () {
     // create a sorted copy of the pets array

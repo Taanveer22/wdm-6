@@ -5,12 +5,14 @@
   font-family: "Lato", sans-serif;
 }
 
+/* active button styles */
 .active{
   background-color: green;
   color: white;
   border-radius: 50px;
 }
 
+/* loading spinner hide */
 #spinner{
   display: none;
 }
