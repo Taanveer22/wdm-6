@@ -42,7 +42,7 @@ const loadPetCardByCategoryBtn = async (ctgBtn) => {
   // acitve btn functionality implementation
   removeActiveClass();
   const activeButton = document.getElementById(`button-${ctgBtn}`);
-  console.log(activeButton);
+  // console.log(activeButton);
   activeButton.classList.add("active");
   // sort btn functinality implementation
   const petsByCategeory = data.data || [];
@@ -328,11 +328,11 @@ const sortByPrice = (allPets) => {
   sortButton.addEventListener("click", function () {
     // create a sorted copy of the pets array
     const sortedPets = [...allPets].sort((a, b) => {
-      console.log(a.price, b.price);
+      // console.log(a.price, b.price);
       // handle missing prices defaulting to 0
       const priceA = parseFloat(a.price) || 0;
       const priceB = parseFloat(b.price) || 0;
-      console.log(priceA, priceB);
+      // console.log(priceA, priceB);
       return priceB - priceA;
     });
     // display the sorted pets
