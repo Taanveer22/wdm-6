@@ -3,14 +3,10 @@ console.log("connected");
 // load category btn data from api : 1 ===================
 // =======================================================
 const loadCategoryBtnData = async () => {
-  document.getElementById("spinner").style.display = "block";
   const res = await fetch(
     `https://openapi.programming-hero.com/api/peddy/categories`
   );
   const data = await res.json();
-  if (data.categories.length > 0) {
-    document.getElementById("spinner").style.display = "none";
-  }
   displayCategoryBtn(data.categories);
 };
 
@@ -29,11 +25,18 @@ const loadPetCardData = async () => {
 // load pets card by pet category from api : 3 =========================
 // =====================================================================
 const loadPetCardByCategoryBtn = async (ctgBtn) => {
+  // spinner show
+  document.getElementById("spinner").style.display = "block";
   // alert(ctgBtn);
   const res = await fetch(
     `https://openapi.programming-hero.com/api/peddy/category/${ctgBtn}`
   );
   const data = await res.json();
+  // spinner hide
+  if (data.data.length > 0) {
+    document.getElementById("spinner").style.display = "none";
+  }
+  // acitve btn functionality
   removeActiveClass();
   const activeButton = document.getElementById(`button-${ctgBtn}`);
   console.log(activeButton);
@@ -312,7 +315,7 @@ const handleDisabled = (petId) => {
 };
 
 // =====================================================================
-// implement sorting funtionality via api: 3 ===========================
+// implement sorting funtionality via api: 3 ==========================
 // =====================================================================
 const sortByPrice = (allPets) => {
   console.log(allPets);
