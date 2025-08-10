@@ -38,7 +38,10 @@ const loadPetCardByCategoryBtn = async (ctgBtn) => {
   const activeButton = document.getElementById(`button-${ctgBtn}`);
   console.log(activeButton);
   activeButton.classList.add("active");
-  displayPetCard(data.data);
+  // for sort button implementation
+  const allPets = data.data || [];
+  displayPetCard(allPets);
+  sortByPrice(allPets);
 };
 
 // ===============================================================
@@ -199,7 +202,8 @@ const displayModal = (modalData) => {
   const modalContent = document.querySelector("#modal-content");
   // console.log(modalContent);
   modalContent.innerHTML = `
-  <img class = "h-64 w-full object-cover" src = "${modalData.image}"/>
+  <img class = "h-24 sm:h-44 xl:h-64 w-full object-cover" 
+      src = "${modalData.image}"/>
   <h2 class="text-base sm:text-2xl font-semibold my-3">
       ${modalData.pet_name}
   </h2>
@@ -306,6 +310,30 @@ const handleDisabled = (petId) => {
     adoptBtn.disabled = true;
   }, 1000);
 };
+
+// =====================================================================
+// implement sorting funtionality via api: 3 ===========================
+// =====================================================================
+const sortByPrice = (allPets) => {
+  console.log(allPets);
+  const sortButton = document.getElementById("sort-button");
+  console.log(sortButton);
+
+  sortButton.addEventListener("click", function () {
+    // create a sorted copy of the pets array
+    const sortedPets = [...allPets].sort((a, b) => {
+      console.log(a.price, b.price);
+      // handle missing prices defaulting to 0
+      const priceA = parseFloat(a.price) || 0;
+      const priceB = parseFloat(b.price) || 0;
+      console.log(priceA, priceB);
+      return priceB - priceA;
+    });
+    // display the sorted pets
+    displayPetCard(sortedPets);
+  });
+};
+
 // ======================================================
 //load api function invocation===========================
 // ======================================================
